@@ -44,14 +44,23 @@ function NewsPage() {
                   index === 0 ? "md:col-span-12" : ""
                 }`}
               >
-                <div className="md:col-span-3">
+                <div className="md:col-span-4">
+                  <Link to="/news/$slug" params={{ slug: item.slug }} className="block overflow-hidden rounded-lg">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="h-48 w-full object-cover transition-transform duration-300 hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </Link>
+                </div>
+                <div className="md:col-span-8">
                   <span className="inline-block rounded-full bg-navy px-3 py-1 text-xs font-semibold text-primary-foreground">
                     {item.category}
                   </span>
                   <p className="mt-2 text-sm text-muted-foreground">{item.date}</p>
-                </div>
-                <div className="md:col-span-9">
-                  <h2 className="font-display text-xl font-semibold text-card-foreground md:text-2xl">
+                  <h2 className="mt-2 font-display text-xl font-semibold text-card-foreground md:text-2xl">
                     {item.title}
                   </h2>
                   <p className="mt-3 text-muted-foreground">{item.excerpt}</p>

@@ -1,0 +1,15 @@
+CREATE TABLE public.contact_messages (
+  id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  subject TEXT NOT NULL,
+  message TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
+
+CREATE INDEX contact_messages_email_idx ON public.contact_messages (lower(email));
+
+GRANT ALL ON public.contact_messages TO service_role;
+
+ALTER TABLE public.contact_messages ENABLE ROW LEVEL SECURITY;

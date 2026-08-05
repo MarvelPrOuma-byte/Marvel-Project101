@@ -51,6 +51,13 @@ function NewsStoryPage() {
       <section className="bg-cream">
         <div className="container-wide section-padding">
           <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-card p-8 shadow-sm">
+            <img
+              src={story.image}
+              alt={story.title}
+              className="mb-8 h-64 w-full rounded-xl object-cover md:h-80"
+              loading="eager"
+              decoding="async"
+            />
             <p className="text-lg leading-8 text-foreground">{story.excerpt}</p>
             <div className="mt-8 space-y-6 text-base leading-8 text-muted-foreground">
               {story.content.map((paragraph) => (
