@@ -7,9 +7,17 @@ export function GalleryCarousel({ slides }: { slides: Slide[] }) {
   const [paused, setPaused] = React.useState(false);
   const [lightboxOpen, setLightboxOpen] = React.useState(false);
   const [lightboxIndex, setLightboxIndex] = React.useState(0);
+  const [lightboxZoomed, setLightboxZoomed] = React.useState(false);
   const count = slides.length;
   const containerRef = React.useRef<HTMLDivElement | null>(null);
+  const lightboxRef = React.useRef<HTMLDivElement | null>(null);
   const lightboxSlide = slides[lightboxIndex];
+  const dragRef = React.useRef<{
+    startX: number;
+    startY: number;
+    scrollLeft: number;
+    scrollTop: number;
+  } | null>(null);
 
   // autoplay
   React.useEffect(() => {
@@ -87,13 +95,81 @@ export function GalleryCarousel({ slides }: { slides: Slide[] }) {
   const openLightbox = (i: number) => {
     setLightboxIndex(i);
     setLightboxOpen(true);
+    setLightboxZoomed(false);
     setPaused(true);
   };
 
   const closeLightbox = () => {
     setLightboxOpen(false);
+    setLightboxZoomed(false);
     setPaused(false);
   };
+
+  const changeLightboxIndex = (next: number) => {
+    setLightboxIndex(next);
+    setLightboxZoomed(false);
+    if (lightboxRef.current) {
+      lightboxRef.current.scrollLeft = 0;
+      lightboxRef.current.scrollTop = 0;
+    }
+  };
+
+  const toggleZoom = () => {
+    setLightboxZoomed((z) => {
+      const next = !z;
+      if (!next && lightboxRef.current) {
+        lightboxRef.current.scrollLeft = 0;
+        lightboxRef.current.scrollTop = 0;
+      }
+      return next;
+    });
+  };
+
+  // drag-to-pan for zoomed images
+  React.useEffect(() => {
+    const el = lightboxRef.current;
+    if (!el) return;
+    if (!lightboxZoomed) {
+      el.style.overflow = "hidden";
+      el.scrollLeft = 0;
+      el.scrollTop = 0;
+      return;
+    }
+    el.style.overflow = "auto";
+
+    const onPointerDown = (e: PointerEvent) => {
+      dragRef.current = {
+        startX: e.clientX,
+        startY: e.clientY,
+        scrollLeft: el.scrollLeft,
+        scrollTop: el.scrollTop,
+      };
+      el.setPointerCapture(e.pointerId);
+      el.style.cursor = "grabbing";
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (!dragRef.current) return;
+      el.scrollLeft = dragRef.current.scrollLeft - (e.clientX - dragRef.current.startX);
+      el.scrollTop = dragRef.current.scrollTop - (e.clientY - dragRef.current.startY);
+    };
+
+    const onPointerUp = () => {
+      dragRef.current = null;
+      el.style.cursor = "grab";
+    };
+
+    el.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
+
+    return () => {
+      el.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
+      el.style.cursor = "";
+    };
+  }, [lightboxZoomed]);
 
   return (
     <div
@@ -156,7 +232,9 @@ export function GalleryCarousel({ slides }: { slides: Slide[] }) {
                   key={i}
                   aria-label={`Go to slide ${i + 1}`}
                   onClick={() => setIndex(i)}
-                  className={`h-2 w-8 rounded-full transition-all ${i === index ? "bg-gold" : "bg-primary-foreground/30"}`}
+                  className={`h-2 w-8 rounded-full transition-all ${
+                    i === index ? "bg-gold" : "bg-primary-foreground/30"
+                  }`}
                 />
               ))}
             </div>
@@ -168,7 +246,9 @@ export function GalleryCarousel({ slides }: { slides: Slide[] }) {
               <button
                 key={i}
                 onClick={() => setIndex(i)}
-                className={`thumb flex-none overflow-hidden rounded-md border ${i === index ? "border-gold" : "border-border"}`}
+                className={`thumb flex-none overflow-hidden rounded-md border ${
+                  i === index ? "border-gold" : "border-border"
+                }`}
                 aria-label={`Go to slide ${i + 1}`}
               >
                 <img
@@ -186,35 +266,64 @@ export function GalleryCarousel({ slides }: { slides: Slide[] }) {
 
       {/* Lightbox */}
       {lightboxOpen && lightboxSlide && (
-        <div className="lightbox fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+        <div className="lightbox fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
           <button
             aria-label="Close lightbox"
             onClick={closeLightbox}
-            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-md bg-background/80 text-lg"
+            className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-md bg-background/80 text-lg hover:bg-background/95"
           >
             ✕
           </button>
           <button
             aria-label="Previous"
-            onClick={() => setLightboxIndex((i) => (i - 1 + count) % count)}
-            className="absolute left-2 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-background/80 text-2xl sm:left-4"
+            onClick={() => changeLightboxIndex((lightboxIndex - 1 + count) % count)}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-background/80 text-2xl hover:bg-background/95 sm:left-4"
           >
             ‹
           </button>
-          <div className="w-full max-w-6xl max-h-[85vh]">
+          <div
+            ref={lightboxRef}
+            className={`flex items-center justify-center ${
+              lightboxZoomed ? "cursor-grab select-none" : "cursor-zoom-in select-none"
+            }`}
+            style={{
+              width: lightboxZoomed ? "100%" : "auto",
+              height: lightboxZoomed ? "100%" : "auto",
+              maxWidth: lightboxZoomed ? "none" : "90vw",
+              maxHeight: lightboxZoomed ? "none" : "85vh",
+              overflow: lightboxZoomed ? "auto" : "hidden",
+            }}
+            onClick={toggleZoom}
+          >
             <img
               src={lightboxSlide.src}
               alt={lightboxSlide.alt || `light-${lightboxIndex + 1}`}
-              className="w-full h-auto object-contain lightbox-img"
+              className={
+                lightboxZoomed
+                  ? "max-w-none max-h-none"
+                  : "max-h-[85vh] w-auto h-auto object-contain lightbox-img"
+              }
+              draggable={false}
             />
           </div>
           <button
+            aria-label={lightboxZoomed ? "Fit to screen" : "View full size"}
+            onClick={toggleZoom}
+            className="absolute bottom-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 text-sm hover:bg-background/95"
+            title={lightboxZoomed ? "Fit to screen" : "View full size"}
+          >
+            {lightboxZoomed ? "⊟" : "⊞"}
+          </button>
+          <button
             aria-label="Next"
-            onClick={() => setLightboxIndex((i) => (i + 1) % count)}
-            className="absolute right-2 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-background/80 text-2xl sm:right-4"
+            onClick={() => changeLightboxIndex((lightboxIndex + 1) % count)}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-background/80 text-2xl hover:bg-background/95 sm:right-4"
           >
             ›
           </button>
+          <div className="absolute bottom-4 left-4 z-10 rounded-md bg-background/80 px-3 py-1.5 text-xs text-foreground/80">
+            {lightboxIndex + 1} / {count}
+          </div>
         </div>
       )}
     </div>

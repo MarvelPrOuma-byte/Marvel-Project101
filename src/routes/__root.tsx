@@ -477,22 +477,40 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "King Solomon Comprehensive School" },
+      { title: "King Solomon Comprehensive School — Homa Bay, Kenya" },
       {
         name: "description",
         content:
-          "A place of learning, character, and excellence for students from kindergarten through grade 12.",
+          "King Solomon Comprehensive School in Homa Bay, Kenya offers quality education from kindergarten through grade 9. Learn about admissions, academics, and student life at kingsolomoncomprehensive.co.ke.",
       },
       { name: "author", content: "King Solomon Comprehensive School" },
-      { property: "og:title", content: "King Solomon Comprehensive School" },
+      { name: "keywords", content: "King Solomon Comprehensive, King Solomon Comprehensive School, comprehensive school Homa Bay, private school Kenya, CBC school Kenya, King Solomon School" },
+      { name: "robots", content: "index, follow" },
+      { property: "og:title", content: "King Solomon Comprehensive School — Homa Bay, Kenya" },
       {
         property: "og:description",
         content:
-          "A place of learning, character, and excellence for students from kindergarten through grade 12.",
+          "King Solomon Comprehensive School in Homa Bay, Kenya offers quality education from kindergarten through grade 9. Learn about admissions and student life.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://kingsolomoncomprehensive.co.ke" },
+      { property: "og:image", content: "https://kingsolomoncomprehensive.co.ke/favicon.png" },
+      { property: "og:locale", content: "en_KE" },
+      { property: "og:site_name", content: "King Solomon Comprehensive School" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@KingSolomonCS" },
+      { name: "twitter:title", content: "King Solomon Comprehensive School — Homa Bay, Kenya" },
+      {
+        name: "twitter:description",
+        content:
+          "King Solomon Comprehensive School in Homa Bay, Kenya offers quality education from kindergarten through grade 9.",
+      },
+      { name: "twitter:image", content: "https://kingsolomoncomprehensive.co.ke/favicon.png" },
+      { name: "geo.region", content: "KE" },
+      { name: "geo.placename", content: "Homa Bay" },
+      { name: "geo.position", content: "-0.5286;34.4536" },
+      { name: "ICBM", content: "-0.5286, 34.4536" },
+      { name: "theme-color", content: "#1e2a4a" },
     ],
     links: [
       {
@@ -506,7 +524,45 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap",
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "canonical", href: "https://kingsolomoncomprehensive.co.ke" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "School",
+          name: "King Solomon Comprehensive School",
+          alternateName: "King Solomon Comprehensive",
+          url: "https://kingsolomoncomprehensive.co.ke",
+          foundingDate: "2007",
+          description:
+            "King Solomon Comprehensive School in Homa Bay, Kenya offers quality education from kindergarten through grade 9.",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "P.O. BOX 91-40300",
+            addressLocality: "Homa Bay",
+            addressCountry: "KE"
+          },
+          email: "admissions@kingsolomoncs.ac.ke",
+          telephone: "+254707467834"
+        })
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://kingsolomoncomprehensive.co.ke" },
+            { "@type": "ListItem", position: 2, name: "About", item: "https://kingsolomoncomprehensive.co.ke/about" },
+            { "@type": "ListItem", position: 3, name: "Academics", item: "https://kingsolomoncomprehensive.co.ke/academics" },
+            { "@type": "ListItem", position: 4, name: "Admissions", item: "https://kingsolomoncomprehensive.co.ke/admissions" },
+            { "@type": "ListItem", position: 5, name: "Contact", item: "https://kingsolomoncomprehensive.co.ke/contacts" }
+          ]
+        })
+      }
+    ]
   }),
   shellComponent: RootShell,
   component: RootComponent,

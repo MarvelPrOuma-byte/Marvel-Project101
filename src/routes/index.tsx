@@ -45,22 +45,24 @@ const stats = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "King Solomon Comprehensive School — Knowledge is Power" },
+      { title: "King Solomon Comprehensive School | Homa Bay, Kenya" },
       {
         name: "description",
         content:
-          "Welcome to King Solomon Comprehensive School. Explore academics, student life, admissions, and the community that prepares students to lead with wisdom and purpose.",
+          "King Solomon Comprehensive School in Homa Bay, Kenya — quality education from kindergarten through grade 9. Explore academics, student life, admissions, and the community that prepares students to lead with wisdom and purpose.",
       },
       {
         property: "og:title",
-        content: "King Solomon Comprehensive School — Learning, Character, Excellence, Fun, Impact",
+        content: "King Solomon Comprehensive School — Homa Bay, Kenya",
       },
       {
         property: "og:description",
         content:
-          "Welcome to King Solomon Comprehensive School. Explore academics, student life, admissions, and the community that prepares students to lead with wisdom and purpose.",
+          "King Solomon Comprehensive School in Homa Bay, Kenya — quality education from kindergarten through grade 9. Explore academics, student life, admissions, and the community that prepares students to lead with wisdom and purpose.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://kingsolomoncomprehensive.co.ke" },
+      { property: "og:image", content: "https://kingsolomoncomprehensive.co.ke/favicon.png" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
@@ -92,7 +94,7 @@ function HomePage() {
               Est. 2007
             </p>
             <h1 className="font-display text-4xl font-bold text-balance md:text-6xl">
-              <AnimatedLetters text={"Learning, Character, Excellence"} />
+              King Solomon Comprehensive School
             </h1>
             <p className="mt-3 text-sm uppercase tracking-[0.3em] text-gold">Knowledge is Power</p>
             <p className="mt-6 text-lg text-primary-foreground/90 md:text-xl">
