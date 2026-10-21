@@ -44,7 +44,7 @@ export const newsStories: NewsStory[] = [
   },
   {
     slug: "girl-guides-nationals",
-    title: "Girl Guides on Their Way to National Level",
+    title: "Girl Guides on Their Way to East Africa Level",
     date: "August 5, 2026",
     category: "Girl Guides",
     excerpt:

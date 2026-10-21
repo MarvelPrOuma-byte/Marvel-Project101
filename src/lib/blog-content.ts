@@ -12,7 +12,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "character-education-middle-school",
     title: "Why Character Education Matters in the Middle School Years",
-    author: "Sarah Bennett, Dean of Students",
+    author: "Mr.Nicholas Otieno, Deputy head Teacher Academics",
     date: "July 12, 2026",
     excerpt:
       "The early-teen years are a pivotal window for forming values. Here's how intentional character education shapes lifelong habits.",
@@ -27,7 +27,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "new-stem-partnership",
     title: "Inside Our New STEM Partnership",
-    author: "Dr. Eleanor Vance, Head of School",
+    author: "Mr.John Obonyo",
     date: "June 30, 2026",
     excerpt:
       "King Solomon Comprehensive School is partnering with a regional research lab to give upper school students hands-on research experience in engineering and biotech.",
@@ -41,7 +41,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "choose-extracurriculars",
     title: "How to Choose the Right Extracurriculars",
-    author: "Marcus Okafor, Academic Dean",
+    author: "Veroline Atieno",
     date: "June 18, 2026",
     excerpt:
       "Depth over breadth: advice for students and families on building a meaningful, balanced schedule outside the classroom.",
@@ -55,7 +55,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "alumni-public-service",
     title: "Alumni Spotlight: Building a Career in Public Service",
-    author: "David Chen, Director of Admissions",
+    author: "Md.Lucy ",
     date: "May 28, 2026",
     excerpt:
       "A conversation with a school alumna about how her high school mentors shaped her path into policy and advocacy.",
