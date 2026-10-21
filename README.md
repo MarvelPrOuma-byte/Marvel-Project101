@@ -1,24 +1,62 @@
-# King Solomon Academy Connect
+# King Solomon Comprehensive School Portal
 
-a school website for King Solomon Academy
+A modern school website and admissions portal for King Solomon Comprehensive School in Homa Bay, Kenya.
 
-This project was built with [Lovable](https://lovable.dev).
+This project is owned and maintained locally as a custom web application for the school’s online presence, admissions, blog, and community communication.
 
-## Build with Lovable
+## Overview
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/654db117-8b4b-457d-a869-b5d2e6e219f8).
+- School information and brand presentation
+- Admissions and application status pages
+- Academics and student life sections
+- Contact and inquiry handling
+- Blog and school community updates
+- SEO-focused metadata for school search visibility
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+## Tech Stack
 
-## Development
+- React + TypeScript
+- Vite
+- TanStack Router
+- Tailwind CSS
+- Supabase integration
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Local Development
+
+Make sure you have Node.js and npm installed.
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+git clone <repository-url>
+cd king-solomon-academy-portal-main
+npm install
 npm run dev
 ```
+
+Then open the local URL shown in the terminal, usually:
+
+```sh
+http://localhost:5173
+```
+
+## Production Build
+
+```sh
+npm run build
+```
+
+## Project Structure
+
+```sh
+src/
+  routes/
+  components/
+  lib/
+  integrations/
+public/
+supabase/
+```
+
+## Notes
+
+This repository is the source of truth for the school website. You are free to manage deployments, updates, and future enhancements directly from this project without relying on Lovable tooling.
+

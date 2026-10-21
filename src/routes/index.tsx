@@ -45,20 +45,21 @@ const stats = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "King Solomon Comprehensive School | Homa Bay, Kenya" },
+      { title: "Best Private School in Kenya | King Solomon Comprehensive School, Homa Bay" },
       {
         name: "description",
         content:
-          "King Solomon Comprehensive School in Homa Bay, Kenya — quality education from kindergarten through grade 9. Explore academics, student life, admissions, and the community that prepares students to lead with wisdom and purpose.",
+          "King Solomon Comprehensive School is a leading best private school in Kenya and a top choice for families seeking the best school in Homa Bay, Kenya. We offer quality education, character development, and a supportive community from kindergarten through grade 9.",
       },
+      { name: "keywords", content: "best private school in Kenya, best school in Kenya, best school in Homa Bay, private school in Homa Bay, top school in Kenya, primary school in Kenya, kindergarten in Kenya, King Solomon Comprehensive School" },
       {
         property: "og:title",
-        content: "King Solomon Comprehensive School — Homa Bay, Kenya",
+        content: "Best Private School in Kenya | King Solomon Comprehensive School, Homa Bay",
       },
       {
         property: "og:description",
         content:
-          "King Solomon Comprehensive School in Homa Bay, Kenya — quality education from kindergarten through grade 9. Explore academics, student life, admissions, and the community that prepares students to lead with wisdom and purpose.",
+          "Explore King Solomon Comprehensive School, a leading private school in Homa Bay, Kenya known for strong academics, character formation, and a nurturing learning environment for children from kindergarten through grade 9.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://kingsolomoncomprehensive.co.ke" },
@@ -98,7 +99,9 @@ function HomePage() {
             </h1>
             <p className="mt-3 text-sm uppercase tracking-[0.3em] text-gold">Knowledge is Power</p>
             <p className="mt-6 text-lg text-primary-foreground/90 md:text-xl">
-              King Solomon Comprehensive School prepares students from kindergarten through grade 9
+              Families searching for the best private school in Kenya, the best school in Homa Bay,
+              or a trusted school in Kenya for academic excellence and character development choose
+              King Solomon Comprehensive School. We prepare students from kindergarten through grade 9
               to lead with wisdom, integrity, and purpose.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">

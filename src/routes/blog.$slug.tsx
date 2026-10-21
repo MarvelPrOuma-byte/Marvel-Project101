@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-import { getBlogPost } from "@/lib/blog-content";
 import AnimatedLetters from "@/components/ui/AnimatedLetters";
+import { blogPosts, getBlogPost } from "@/lib/blog-content";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
@@ -31,6 +31,9 @@ export const Route = createFileRoute("/blog/$slug")({
 
 function BlogPostPage() {
   const { post } = Route.useLoaderData();
+  const currentIndex = blogPosts.findIndex((item) => item.slug === post.slug);
+  const previousPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex >= 0 && currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
 
   return (
     <div>
@@ -52,19 +55,72 @@ function BlogPostPage() {
 
       <section className="bg-cream">
         <div className="container-wide section-padding">
-          <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-card p-8 shadow-sm">
-            <p className="text-lg leading-8 text-foreground">{post.excerpt}</p>
-            <div className="mt-8 space-y-6 text-base leading-8 text-muted-foreground">
+          <div className="mx-auto max-w-4xl rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8 lg:p-10">
+            <p className="text-xl leading-9 text-foreground md:text-2xl md:leading-10">
+              {post.excerpt}
+            </p>
+            <div className="mt-8 space-y-7 text-lg leading-9 text-muted-foreground md:text-xl md:leading-10">
               {post.content.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
-            <Link
-              to="/blog"
-              className="mt-8 inline-flex rounded-md bg-navy px-4 py-2 text-sm font-semibold text-primary-foreground"
-            >
-              ← Back to all posts
-            </Link>
+
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <Link
+                to="/blog"
+                className="inline-flex rounded-md bg-navy px-4 py-2 text-sm font-semibold text-primary-foreground"
+              >
+                ← Back to all posts
+              </Link>
+            </div>
+
+            <div className="mt-10 grid gap-4 md:grid-cols-2">
+              {previousPost ? (
+                <Link
+                  to="/blog/$slug"
+                  params={{ slug: previousPost.slug }}
+                  className="group rounded-2xl border border-border bg-background p-5 text-left transition-colors hover:border-gold/60 hover:bg-gold/5"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+                    Previous article
+                  </p>
+                  <h3 className="mt-3 font-display text-xl font-semibold text-foreground group-hover:text-navy">
+                    {previousPost.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{previousPost.excerpt}</p>
+                  <span className="mt-4 inline-flex text-sm font-semibold text-navy">
+                    ← Read previous
+                  </span>
+                </Link>
+              ) : (
+                <div className="rounded-2xl border border-dashed border-border bg-background/50 p-5 text-left text-sm text-muted-foreground">
+                  You’re at the beginning of the series.
+                </div>
+              )}
+
+              {nextPost ? (
+                <Link
+                  to="/blog/$slug"
+                  params={{ slug: nextPost.slug }}
+                  className="group rounded-2xl border border-border bg-background p-5 text-left transition-colors hover:border-gold/60 hover:bg-gold/5"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+                    Next article
+                  </p>
+                  <h3 className="mt-3 font-display text-xl font-semibold text-foreground group-hover:text-navy">
+                    {nextPost.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{nextPost.excerpt}</p>
+                  <span className="mt-4 inline-flex text-sm font-semibold text-navy">
+                    Read next →
+                  </span>
+                </Link>
+              ) : (
+                <div className="rounded-2xl border border-dashed border-border bg-background/50 p-5 text-left text-sm text-muted-foreground">
+                  You’ve reached the latest article.
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>

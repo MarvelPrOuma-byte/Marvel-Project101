@@ -234,7 +234,7 @@ function Footer() {
           fill="none"
           stroke="currentColor"
           strokeWidth="1.8"
-          className="h-4 w-4"
+          className="h-3.5 w-3.5"
         >
           <path d="M21 8.5a3 3 0 0 0-2.1-2.1C17.5 6 12 6 12 6s-5.5 0-6.9.4A3 3 0 0 0 3 8.5 31 31 0 0 0 2.5 12 31 31 0 0 0 3 15.5a3 3 0 0 0 2.1 2.1C6.5 18 12 18 12 18s5.5 0 6.9-.4A3 3 0 0 0 21 15.5 31 31 0 0 0 21.5 12 31 31 0 0 0 21 8.5Z" />
           <path d="m10 9.5 5 2.5-5 2.5v-5Z" />
@@ -250,7 +250,7 @@ function Footer() {
           fill="none"
           stroke="currentColor"
           strokeWidth="1.8"
-          className="h-4 w-4"
+          className="h-3.5 w-3.5"
         >
           <path d="M14 8h2V5h-2a3 3 0 0 0-3 3v2H8v3h3v7h3v-7h2.5l.5-3H14V8Z" />
         </svg>
@@ -265,7 +265,7 @@ function Footer() {
           fill="none"
           stroke="currentColor"
           strokeWidth="1.8"
-          className="h-4 w-4"
+          className="h-3.5 w-3.5"
         >
           <path d="M14 5a5 5 0 0 0 5 5V7a3 3 0 0 1-3-3h-2Z" />
           <path d="M16 10a4 4 0 0 1 4 4v1a4 4 0 0 1-4 4 4 4 0 0 1-4-4v-1a4 4 0 0 1 4-4Z" />
@@ -281,7 +281,7 @@ function Footer() {
           fill="none"
           stroke="currentColor"
           strokeWidth="1.8"
-          className="h-4 w-4"
+          className="h-3.5 w-3.5"
         >
           <rect x="4" y="4" width="16" height="16" rx="2" />
           <path d="M8 10v6" />
@@ -300,7 +300,7 @@ function Footer() {
           fill="none"
           stroke="currentColor"
           strokeWidth="1.8"
-          className="h-4 w-4"
+          className="h-3.5 w-3.5"
         >
           <rect x="4" y="4" width="16" height="16" rx="4" />
           <circle cx="12" cy="12" r="3.5" />
@@ -317,7 +317,7 @@ function Footer() {
           fill="none"
           stroke="currentColor"
           strokeWidth="1.8"
-          className="h-4 w-4"
+          className="h-3.5 w-3.5"
         >
           <path d="M5 5l14 14" />
           <path d="M19 5 5 19" />
@@ -382,9 +382,9 @@ function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/10 bg-primary-foreground/10 px-3 py-2 text-sm font-medium text-primary-foreground/90 transition-colors hover:bg-primary-foreground/20"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-primary-foreground/10 bg-primary-foreground/10 px-2.5 py-1.5 text-xs font-medium text-primary-foreground/90 transition-colors hover:bg-primary-foreground/20"
                 >
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gold/15 text-gold">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gold/15 text-gold">
                     {social.icon}
                   </span>
                   <span>{social.label}</span>
@@ -477,20 +477,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "King Solomon Comprehensive School — Homa Bay, Kenya" },
+      { title: "Best Private School in Kenya | King Solomon Comprehensive School" },
       {
         name: "description",
         content:
-          "King Solomon Comprehensive School in Homa Bay, Kenya offers quality education from kindergarten through grade 9. Learn about admissions, academics, and student life at kingsolomoncomprehensive.co.ke.",
+          "King Solomon Comprehensive School is a leading best private school in Kenya in Homa Bay, offering quality education, character development, and a nurturing environment for kindergarten through grade 9 learners.",
       },
       { name: "author", content: "King Solomon Comprehensive School" },
-      { name: "keywords", content: "King Solomon Comprehensive, King Solomon Comprehensive School, comprehensive school Homa Bay, private school Kenya, CBC school Kenya, King Solomon School" },
+      {
+        name: "keywords",
+        content:
+          "best private school in Kenya, best school in Kenya, best school in Homa Bay, top private school in Kenya, private school in Homa Bay, kindergarten school in Kenya, primary school in Homa Bay, CBC school in Kenya, school in Homa Bay Kenya, King Solomon Comprehensive School",
+      },
       { name: "robots", content: "index, follow" },
-      { property: "og:title", content: "King Solomon Comprehensive School — Homa Bay, Kenya" },
+      { property: "og:title", content: "Best Private School in Kenya | King Solomon Comprehensive School" },
       {
         property: "og:description",
         content:
-          "King Solomon Comprehensive School in Homa Bay, Kenya offers quality education from kindergarten through grade 9. Learn about admissions and student life.",
+          "Discover King Solomon Comprehensive School, a leading private school in Homa Bay, Kenya offering exceptional academics, values, and student growth from kindergarten through grade 9.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://kingsolomoncomprehensive.co.ke" },
