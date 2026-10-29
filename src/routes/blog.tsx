@@ -57,7 +57,12 @@ function BlogPage() {
                   <p className="mt-3 flex-1 text-sm text-muted-foreground">{post.excerpt}</p>
                   <div className="mt-4 border-t border-border pt-4">
                     <p className="text-xs font-medium text-muted-foreground">{post.author}</p>
-                    <p className="text-xs text-muted-foreground">{post.date}</p>
+                    <time
+                      dateTime={new Date(post.date).toISOString()}
+                      className="text-xs text-muted-foreground"
+                    >
+                      {post.date}
+                    </time>
                     <Link
                       to="/blog/$slug"
                       params={{ slug: post.slug }}

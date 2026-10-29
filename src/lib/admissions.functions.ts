@@ -52,7 +52,7 @@ function makeReferenceCode(): string {
 }
 
 export const submitInquiry = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => inquirySchema.parse(data))
+  .validator((data: unknown) => inquirySchema.parse(data))
   .handler(async ({ data }): Promise<InquiryRecord> => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
@@ -83,7 +83,7 @@ export const submitInquiry = createServerFn({ method: "POST" })
   });
 
 export const trackInquiry = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => trackSchema.parse(data))
+  .validator((data: unknown) => trackSchema.parse(data))
   .handler(async ({ data }): Promise<InquiryRecord | null> => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 

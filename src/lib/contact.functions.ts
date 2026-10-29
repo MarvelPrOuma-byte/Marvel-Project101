@@ -116,7 +116,7 @@ async function syncToGoogleSheets(record: ContactRecord) {
 }
 
 export const submitContactMessage = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => contactSchema.parse(data))
+  .validator((data: unknown) => contactSchema.parse(data))
   .handler(async ({ data }): Promise<ContactRecord> => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 

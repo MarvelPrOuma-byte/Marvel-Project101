@@ -11,6 +11,53 @@ export const Route = createFileRoute("/blog/$slug")({
     }
     return { post };
   },
+  head: ({ loaderData }) => {
+    const post = loaderData?.post;
+    if (!post) return {};
+
+    const canonicalUrl = `https://kingsolomoncomprehensive.co.ke/blog/${post.slug}`;
+    const datePublished = new Date(post.date).toISOString();
+
+    return {
+      meta: [
+        { title: `${post.title} — King Solomon Comprehensive School` },
+        { name: "description", content: post.excerpt },
+        { name: "author", content: post.author },
+        { property: "og:title", content: post.title },
+        { property: "og:description", content: post.excerpt },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: canonicalUrl },
+        { property: "og:site_name", content: "King Solomon Comprehensive School" },
+        { property: "article:published_time", content: datePublished },
+        { property: "article:author", content: post.author },
+        { property: "article:section", content: post.category },
+        { name: "twitter:card", content: "summary" },
+        { name: "twitter:title", content: post.title },
+        { name: "twitter:description", content: post.excerpt },
+      ],
+      links: [{ rel: "canonical", href: canonicalUrl }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: post.title,
+            description: post.excerpt,
+            author: { "@type": "Person", name: post.author },
+            datePublished,
+            articleSection: post.category,
+            mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
+            publisher: {
+              "@type": "Organization",
+              name: "King Solomon Comprehensive School",
+              url: "https://kingsolomoncomprehensive.co.ke",
+            },
+          }),
+        },
+      ],
+    };
+  },
   notFoundComponent: () => (
     <div className="container-wide section-padding py-20">
       <p className="text-sm font-semibold uppercase tracking-widest text-gold">Blog</p>
@@ -33,7 +80,8 @@ function BlogPostPage() {
   const { post } = Route.useLoaderData();
   const currentIndex = blogPosts.findIndex((item) => item.slug === post.slug);
   const previousPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
-  const nextPost = currentIndex >= 0 && currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
+  const nextPost =
+    currentIndex >= 0 && currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
 
   return (
     <div>
@@ -48,7 +96,7 @@ function BlogPostPage() {
           <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-primary-foreground/75">
             <span>{post.author}</span>
             <span>•</span>
-            <span>{post.date}</span>
+            <time dateTime={new Date(post.date).toISOString()}>{post.date}</time>
           </div>
         </div>
       </section>

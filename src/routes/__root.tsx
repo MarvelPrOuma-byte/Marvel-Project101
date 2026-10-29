@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
@@ -434,7 +435,7 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
@@ -490,7 +491,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "best private school in Kenya, best school in Kenya, best school in Homa Bay, top private school in Kenya, private school in Homa Bay, kindergarten school in Kenya, primary school in Homa Bay, CBC school in Kenya, school in Homa Bay Kenya, King Solomon Comprehensive School",
       },
       { name: "robots", content: "index, follow" },
-      { property: "og:title", content: "Best Private School in Kenya | King Solomon Comprehensive School" },
+      {
+        property: "og:title",
+        content: "Best Private School in Kenya | King Solomon Comprehensive School",
+      },
       {
         property: "og:description",
         content:
@@ -546,11 +550,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             "@type": "PostalAddress",
             streetAddress: "P.O. BOX 91-40300",
             addressLocality: "Homa Bay",
-            addressCountry: "KE"
+            addressCountry: "KE",
           },
           email: "admissions@kingsolomoncs.ac.ke",
-          telephone: "+254707467834"
-        })
+          telephone: "+254707467834",
+        }),
       },
       {
         type: "application/ld+json",
@@ -558,15 +562,40 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://kingsolomoncomprehensive.co.ke" },
-            { "@type": "ListItem", position: 2, name: "About", item: "https://kingsolomoncomprehensive.co.ke/about" },
-            { "@type": "ListItem", position: 3, name: "Academics", item: "https://kingsolomoncomprehensive.co.ke/academics" },
-            { "@type": "ListItem", position: 4, name: "Admissions", item: "https://kingsolomoncomprehensive.co.ke/admissions" },
-            { "@type": "ListItem", position: 5, name: "Contact", item: "https://kingsolomoncomprehensive.co.ke/contacts" }
-          ]
-        })
-      }
-    ]
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://kingsolomoncomprehensive.co.ke",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "About",
+              item: "https://kingsolomoncomprehensive.co.ke/about",
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: "Academics",
+              item: "https://kingsolomoncomprehensive.co.ke/academics",
+            },
+            {
+              "@type": "ListItem",
+              position: 4,
+              name: "Admissions",
+              item: "https://kingsolomoncomprehensive.co.ke/admissions",
+            },
+            {
+              "@type": "ListItem",
+              position: 5,
+              name: "Contact",
+              item: "https://kingsolomoncomprehensive.co.ke/contacts",
+            },
+          ],
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
